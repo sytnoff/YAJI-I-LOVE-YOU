@@ -1,0 +1,32 @@
+#include <iostream>
+#include <Windows.h>
+
+
+int main() {
+
+	while (true) {
+		if (GetAsyncKeyState(VK_ESCAPE))
+		{
+			system("start notepad.exe");
+			Sleep(1000);
+
+			HWND hwnd = FindWindowA("Notepad", NULL); 
+			if (hwnd) {
+				SetForegroundWindow(hwnd);
+			}
+
+			char a[] = "yaji,i love you";
+
+			for (char b : a) {
+				SHORT vk = VkKeyScanA(b);
+				if (vk != -1) {
+					keybd_event((BYTE)vk, 0, 0, 0);
+					keybd_event((BYTE)vk, 0, KEYEVENTF_KEYUP,0);
+				}
+				Sleep(100);
+
+			}
+			break;
+		}
+	}
+}
